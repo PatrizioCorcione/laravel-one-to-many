@@ -47,6 +47,7 @@
 
               <td>
                 {{ $item->title }}
+                <span class="badge text-bg-primary">{{ $item->type->type }}</span>
               </td>
               <td>
                 {{ $item->description }}
