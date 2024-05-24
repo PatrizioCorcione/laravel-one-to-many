@@ -24,12 +24,7 @@
       </div>
     @endif
 
-    <form class="d-flex " action="{{ route('admin.project.store') }}" method="POST">
-      @csrf
-      <input placeholder="Titolo" type="text" name="title" id="">
-      <input placeholder="Descrizione" class="mx-3 " type="text" name="description" id="">
-      <button class="btn btn-outline-primary " type="submit">Invia</button>
-    </form>
+
     <table class="table">
       <thead>
         <tr>
@@ -47,7 +42,7 @@
 
               <td>
                 {{ $item->title }}
-                <span class="badge text-bg-primary">{{ $item->type->type }}</span>
+                <span class="badge text-bg-primary">{{ $item->type?->type }}</span>
               </td>
               <td>
                 {{ $item->description }}
@@ -60,9 +55,9 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger  index-btn"><i class="fa-solid fa-circle-xmark"></i></button>
               </form>
-              <button class="btn btn-warning  mx-2" onclick="submitForm('form-edit-{{ $item->id }}')">
+              <a href="{{ route('admin.project.edit', $item) }}" class="btn btn-warning  mx-2">
                 <i class="fa-solid fa-pen-nib text-black "></i></a>
-              </button>
+              </a>
             </td>
           </tr>
         @empty
@@ -71,11 +66,4 @@
       </tbody>
     </table>
   </div>
-  <script>
-    function submitForm(id) {
-      const form = document.getElementById(id)
-
-      form.submit();
-    }
-  </script>
 @endsection

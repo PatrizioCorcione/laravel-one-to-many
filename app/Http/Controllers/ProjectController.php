@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Functions\Helper;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -22,7 +23,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        $route =  route('admin.project.store');
+        $method = 'POST';
+        $project = null;
+        return view('admin.projects.create_edit', compact('route', 'method', 'project', 'types'));
     }
 
     /**
@@ -33,7 +38,8 @@ class ProjectController extends Controller
         $valData = $request->validate(
             [
                 'title' => 'required|min:2|max:20',
-                'description' => 'required|min:2|max:200'
+                'description' => 'required|min:2|max:200',
+                'type_id' => 'exists:types,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
@@ -48,6 +54,7 @@ class ProjectController extends Controller
         $new_project = new Project();
         $new_project->title = $valData['title'];
         $new_project->description = $valData['description'];
+        $new_project->type_id = $valData['type_id'];
         $new_project->slug = Helper::makeSlug($new_project['title'], new Project());
         $new_project->save();
 
@@ -67,6 +74,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $types = Type::all();
+        $route =  route('admin.project.update', $project);
+        $method = 'PUT';
+        return view('admin.projects.create_edit', compact('project', 'route', 'method', 'types'));
     }
 
     /**
@@ -77,7 +88,8 @@ class ProjectController extends Controller
         $valData = $request->validate(
             [
                 'title' => 'required|min:2|max:20',
-                'description' => 'required|min:2|max:200'
+                'description' => 'required|min:2|max:200',
+                'type_id' => 'exists:types,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
@@ -93,6 +105,7 @@ class ProjectController extends Controller
         } else {
             $valData['slug'] = Helper::makeSlug($valData['title'], new Project());
         }
+        // dd($request->all());
         $project->update($valData);
         return redirect()->route('admin.project.index')->with('success', 'Progetto aggiornato con successo.');
     }

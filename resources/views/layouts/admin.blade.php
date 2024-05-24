@@ -23,7 +23,7 @@
   @include('admin.partials.header')
   <div class="d-flex h-100 ">
     @include('admin.partials.aside')
-    <div class="overflow-y-auto  w-100 ">
+    <div class="overflow-y-auto  w-100">
       @yield('content')
     </div>
   </div>
