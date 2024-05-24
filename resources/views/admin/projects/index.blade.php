@@ -8,22 +8,11 @@
       </div>
     @endif
 
-    @if ($errors->any())
-      <div class="alert alert-danger " role='alert'>
-        <ul>
-          @foreach ($errors->all() as $item)
-            <li>{{ $item }}</li>
-          @endforeach
-        </ul>
-      </div>
-    @endif
-
     @if (session('deleted'))
       <div class="alert alert-primary" role='alert'>
         {{ session('deleted') }}
       </div>
     @endif
-
 
     <table class="table">
       <thead>
@@ -65,5 +54,6 @@
         @endforelse
       </tbody>
     </table>
+    {{ $project->links('pagination::bootstrap-5') }}
   </div>
 @endsection
