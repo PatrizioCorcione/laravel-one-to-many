@@ -52,10 +52,8 @@ class ProjectController extends Controller
         );
 
         $new_project = new Project();
-        $new_project->title = $valData['title'];
-        $new_project->description = $valData['description'];
-        $new_project->type_id = $valData['type_id'];
-        $new_project->slug = Helper::makeSlug($new_project['title'], new Project());
+        $valData['slug'] = Helper::makeSlug($valData['title'], new Project());
+        $new_project->fill($valData);
         $new_project->save();
 
         return redirect()->route('admin.project.index', $new_project);
@@ -105,7 +103,6 @@ class ProjectController extends Controller
         } else {
             $valData['slug'] = Helper::makeSlug($valData['title'], new Project());
         }
-        // dd($request->all());
         $project->update($valData);
         return redirect()->route('admin.project.index')->with('success', 'Progetto aggiornato con successo.');
     }
