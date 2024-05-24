@@ -1,0 +1,19 @@
+nav{
+    height: 50px;
+}
+.aside{
+    width: 200px;
+    height: calc(100vh - 50px) !important;
+}
+.table{
+    td{
+        font-size: 0.8rem;
+    }
+    input{
+        border: none;
+        cursor: pointer;
+    }
+}
+button{
+    padding: 2px 7px !important;
+}
