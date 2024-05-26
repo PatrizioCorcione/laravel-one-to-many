@@ -17,13 +17,15 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col"><a href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'id']) }}">ID</a>
+          <th scope="col"><a
+              href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'id', 'toSearch' => request('toSearch')]) }}">ID</a>
           </th>
           <th scope="col"><a
-              href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'title']) }}">Titolo</a></th>
+              href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'title', 'toSearch' => request('toSearch')]) }}">Titolo</a>
+          </th>
           <th scope="col">Descrizione</th>
           <th class=" " scope="col"><a
-              href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'type_id']) }}">Tipi</a>
+              href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'type_id', 'toSearch' => request('toSearch')]) }}">Tipi</a>
           </th>
           <th class="text-end " scope="col">Azioni</th>
         </tr>

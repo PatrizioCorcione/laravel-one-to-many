@@ -14,20 +14,33 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        if (isset($_GET['toSearch'])) {
-            $project = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')->paginate(7);
+        $toSearch = isset($_GET['toSearch']) ? $_GET['toSearch'] : null;
+
+        if ($toSearch) {
+            $project = Project::where('title', 'LIKE', '%' . $toSearch . '%')->paginate(7);
         } else {
             $project = Project::orderBy('id', 'asc')->paginate(7);
         }
+
         $direction = 'asc';
-        return view('admin.projects.index', compact('project', 'direction'));
+        return view('admin.projects.index', compact('project', 'direction', 'toSearch'));
     }
+
     public function orderBy($direction, $column)
     {
+        $toSearch = isset($_GET['toSearch']) ? $_GET['toSearch'] : null;
+
         $direction = $direction === 'desc' ? 'asc' : 'desc';
-        $project = Project::orderBy($column, $direction)->paginate(7);
-        return view('admin.projects.index', compact('project', 'direction'));
+
+        if ($toSearch) {
+            $project = Project::where('title', 'LIKE', '%' . $toSearch . '%')->orderBy($column, $direction)->paginate(7);
+        } else {
+            $project = Project::orderBy($column, $direction)->paginate(7);
+        }
+
+        return view('admin.projects.index', compact('project', 'direction', 'toSearch', 'column'));
     }
+
 
     /**
      * Show the form for creating a new resource.
