@@ -31,7 +31,7 @@
 
               <td>
                 {{ $item->title }}
-                <span class="badge text-bg-primary">{{ $item->type?->type }}</span>
+                <span class="badge text-bg-primary badge-pos">{{ $item->type?->type }}</span>
               </td>
               <td>
                 {{ $item->description }}
@@ -44,7 +44,7 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger  index-btn"><i class="fa-solid fa-circle-xmark"></i></button>
               </form>
-              <a href="{{ route('admin.project.edit', $item) }}" class="btn btn-warning  mx-2">
+              <a href="{{ route('admin.project.edit', $item) }}" class="btn btn-warning index-btn mx-2">
                 <i class="fa-solid fa-pen-nib text-black "></i></a>
               </a>
             </td>
