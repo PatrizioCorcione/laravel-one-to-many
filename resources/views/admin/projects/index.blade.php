@@ -27,6 +27,9 @@
           <th class=" " scope="col"><a
               href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'type_id', 'toSearch' => request('toSearch')]) }}">Tipi</a>
           </th>
+          <th scope="col">
+            Github
+          </th>
           <th class="text-end " scope="col">Azioni</th>
         </tr>
       </thead>
@@ -46,6 +49,11 @@
 
               <td>
                 {{ $item->type?->type }}
+              </td>
+              <td>
+                <a href="https://github.com/PatrizioCorcione/laravel-auth">
+                  {{ $item->github }}
+                </a>
               </td>
             </form>
             <td class="d-flex flex-row-reverse ">

@@ -5,10 +5,10 @@
 
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  text-white" target="_blanck" href="{{ route('admin.home') }}">Home</a>
+          <a class="nav-link  text-white" target="_blanck" href="{{ route('home') }}">Guest Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  text-white" href="{{ route('dashboard') }}">Dashboard</a>
+          <a class="nav-link  text-white" target="_blanck" href="{{ route('admin.home') }}">Admin Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  text-white" href="{{ route('logout') }}"

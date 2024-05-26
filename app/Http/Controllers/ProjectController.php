@@ -61,17 +61,18 @@ class ProjectController extends Controller
     {
         $valData = $request->validate(
             [
-                'title' => 'required|min:2|max:20',
-                'description' => 'required|min:2|max:200',
+                'title' => 'required|min:5|max:100',
+                'description' => 'required|min:10|max:1000',
+                'github' => 'required|max:100',
                 'type_id' => 'exists:types,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
                 'title.min' => 'Il titolo deve contenere almeno :min caratteri.',
-                'title.max' => 'Il titolo non può superare i :max caratteri.',
-                'description.required' => 'La descrizione è obbligatoria.',
+                'title.max' => 'La descrizione non può superare i :max caratteri.',
                 'description.min' => 'La descrizione deve contenere almeno :min caratteri.',
                 'description.max' => 'La descrizione non può superare i :max caratteri.',
+                'github.max' => 'La descrizione non può superare i :max caratteri.',
             ]
         );
 
@@ -109,17 +110,18 @@ class ProjectController extends Controller
     {
         $valData = $request->validate(
             [
-                'title' => 'required|min:2|max:20',
-                'description' => 'required|min:2|max:200',
+                'title' => 'required|min:5|max:100',
+                'description' => 'required|min:10|max:1000',
+                'github' => 'required|max:100',
                 'type_id' => 'exists:types,id',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
                 'title.min' => 'Il titolo deve contenere almeno :min caratteri.',
-                'title.max' => 'Il titolo non può superare i :max caratteri.',
-                'description.required' => 'La descrizione è obbligatoria.',
+                'title.max' => 'La descrizione non può superare i :max caratteri.',
                 'description.min' => 'La descrizione deve contenere almeno :min caratteri.',
                 'description.max' => 'La descrizione non può superare i :max caratteri.',
+                'github.max' => 'La descrizione non può superare i :max caratteri.',
             ]
         );
         if ($valData['title'] === $project->title) {

@@ -18,10 +18,10 @@
       </div>
       <div class="form-floating mb-3">
         <textarea value="" name="description"
-          class="form-control @error('description')
+          class="form-control t-area-he @error('description')
         is-invalid
-        @enderror" placeholder="Leave a comment here"
-          id="floatingTextarea2Disabled">{{ old('description', $project?->description) }}</textarea>
+        @enderror"
+          placeholder="Leave a comment here" id="floatingTextarea2Disabled">{{ old('description', $project?->description) }}</textarea>
         <label for="floatingTextarea2Disabled">Descrizione</label>
         @error('description')
           <small class="text-danger">{{ $message }}</small>
@@ -36,6 +36,16 @@
         @endforeach
 
       </select>
+      <div class="mb-3">
+        <label class="form-label"></label>
+        <input value="{{ old('github', $project?->github) }}" name="github" placeholder="Github link" type="text"
+          class="form-control @error('github')
+          is-invalid
+          @enderror">
+        @error('github')
+          <small class="text-danger">{{ $message }}</small>
+        @enderror
+      </div>
 
       <button type="submit" class="btn btn-primary my-3">Invia</button>
 
