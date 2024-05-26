@@ -31,12 +31,13 @@ class TypeController extends Controller
     {
         $valData = $request->validate(
             [
-                'type' => 'required|min:2|max:20',
+                'type' => 'required|min:2|max:20|unique:types',
             ],
             [
                 'type.required' => 'Il tipo è obbligatorio.',
                 'type.min' => 'Il nome deve contenere almeno :min caratteri.',
                 'type.max' => 'Il nome non può superare i :max caratteri.',
+                'type.unique' => 'Il nome non può essere gia presente.',
             ]
         );
 

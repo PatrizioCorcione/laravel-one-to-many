@@ -23,7 +23,7 @@
           <th scope="col"><a
               href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'title', 'toSearch' => request('toSearch')]) }}">Titolo</a>
           </th>
-          <th scope="col">Descrizione</th>
+
           <th class=" " scope="col"><a
               href="{{ route('admin.orderby', ['direction' => $direction, 'column' => 'type_id', 'toSearch' => request('toSearch')]) }}">Tipi</a>
           </th>
@@ -36,7 +36,6 @@
             <form action="{{ route('admin.project.update', $item) }}" method="POST" id="form-edit-{{ $item->id }}">
               @csrf
               @method('PUT')
-
               <td>
                 {{ $item->id }}
 
@@ -44,9 +43,7 @@
               <td>
                 {{ $item->title }}
               </td>
-              <td>
-                {{ $item->description }}
-              </td>
+
               <td>
                 {{ $item->type?->type }}
               </td>
@@ -58,8 +55,10 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger  index-btn"><i class="fa-solid fa-circle-xmark"></i></button>
               </form>
-              <a href="{{ route('admin.project.edit', $item) }}" class="btn btn-warning index-btn mx-2">
+              <a href="{{ route('admin.project.edit', $item) }}" class="btn btn-warning index-btn text-white mx-2">
                 <i class="fa-solid fa-pen-nib text-black "></i></a>
+              <a href="{{ route('admin.project.show', $item) }}" class="btn btn-primary index-btn text-white">
+                <i class="fa-solid fa-eye text-black "></i></a>
               </a>
             </td>
           </tr>
