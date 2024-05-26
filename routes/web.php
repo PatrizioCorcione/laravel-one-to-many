@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TechnoController;
 use App\Http\Controllers\TypeController;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('types', TypeController::class)->except([
             'create', 'show', 'edit', 'index'
         ]);
+        Route::get('orderby/{direction}/{column}', [ProjectController::class, 'orderby'])->name('orderby');
     });
 
 Route::get('/dashboard', function () {

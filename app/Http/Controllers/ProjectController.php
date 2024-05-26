@@ -17,10 +17,16 @@ class ProjectController extends Controller
         if (isset($_GET['toSearch'])) {
             $project = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')->paginate(7);
         } else {
-            $project = Project::orderBy('id', 'desc')->paginate(7);
+            $project = Project::orderBy('id', 'asc')->paginate(7);
         }
-
-        return view('admin.projects.index', compact('project'));
+        $direction = 'asc';
+        return view('admin.projects.index', compact('project', 'direction'));
+    }
+    public function orderBy($direction, $column)
+    {
+        $direction = $direction === 'desc' ? 'asc' : 'desc';
+        $project = Project::orderBy($column, $direction)->paginate(7);
+        return view('admin.projects.index', compact('project', 'direction'));
     }
 
     /**
