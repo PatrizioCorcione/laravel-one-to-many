@@ -104,7 +104,7 @@
                   </td>
                 </form>
                 <td>
-                  <button class="btn btn-warning " onclick="submitForm('form-tech-{{ $item->id }}')">
+                  <button class="btn btn-warning index-btn" onclick="submitForm('form-tech-{{ $item->id }}')">
                     <i class="fa-solid fa-pen-nib text-black "></i></a>
                   </button>
                   <form class="d-inline-block" action="{{ route('admin.types.destroy', $item->id) }}" method="POST"
