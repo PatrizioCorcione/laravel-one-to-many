@@ -2,12 +2,14 @@
 
 @section('content')
   <div class="container form my-3 ">
-    <form action={{ $route }} method="POST" class=" g-3">
+    <form action={{ $route }} method="POST" class=" g-3" enctype="multipart/form-data">
       @csrf
       @method($method)
 
       <div class="mb-3">
-        <label class="form-label"></label>
+        @if ($method == 'PUT')
+          <label for="exampleInputEmail1" class="form-label">Titolo</label>
+        @endif
         <input value="{{ old('title', $project?->title) }}" name="title" placeholder="Titolo" type="text"
           class="form-control @error('title')
           is-invalid
@@ -17,6 +19,7 @@
         @enderror
       </div>
       <div class="form-floating mb-3">
+
         <textarea value="" name="description"
           class="form-control t-area-he @error('description')
         is-invalid
@@ -37,9 +40,12 @@
 
       </select>
       <div class="mb-3">
-        <label class="form-label"></label>
+        @if ($method == 'PUT')
+          <label for="exampleInputEmail1" class="form-label mt-3">Github link</label>
+        @endif
+
         <input value="{{ old('github', $project?->github) }}" name="github" placeholder="Github link" type="text"
-          class="form-control @error('github')
+          class="form-control mt-3 @error('github')
           is-invalid
           @enderror">
         @error('github')
@@ -47,8 +53,19 @@
         @enderror
       </div>
 
+      <div class="mb-3">
+        @if ($method == 'PUT')
+          <label for="exampleInputEmail1" class="form-label">Immagine</label>
+        @endif
+        <div class="input-group">
+          <input name="thumb" type="file" class="form-control @error('thumb') is-invalid @enderror"
+            id="inputGroupFile02">
+        </div>
+        @error('thumb')
+          <small class="text-danger d-block mt-1">{{ $message }}</small>
+        @enderror
+      </div>
       <button type="submit" class="btn btn-primary my-3">Invia</button>
-
     </form>
   </div>
 @endsection

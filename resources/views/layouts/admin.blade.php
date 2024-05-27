@@ -16,15 +16,17 @@
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
   <!-- Scripts -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 vh-100 overflow-hidden">
+<body class="font-sans text-gray-900  overflow-y-auto">
+
   @include('admin.partials.header')
-  <div class="d-flex h-100 ">
+  <div class="d-flex cassafrumbolo ">
     @include('admin.partials.aside')
-    <div class="overflow-y-auto  w-100">
+    <div class="overflow-y-auto w-100">
       @yield('content')
+
     </div>
   </div>
 </body>

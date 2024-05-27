@@ -19,6 +19,7 @@ class Project extends Model
         'description',
         'slug',
         'github',
-        'type_id'
+        'thumb',
+        'type_id',
     ];
 }

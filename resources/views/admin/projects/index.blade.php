@@ -51,7 +51,7 @@
                 {{ $item->type?->type }}
               </td>
               <td>
-                <a href="https://github.com/PatrizioCorcione/laravel-auth">
+                <a target="_blanck" href="https://github.com/PatrizioCorcione/laravel-auth">
                   {{ $item->github }}
                 </a>
               </td>

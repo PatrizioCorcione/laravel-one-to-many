@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Functions\Helper;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -62,22 +63,29 @@ class ProjectController extends Controller
         $valData = $request->validate(
             [
                 'title' => 'required|min:5|max:100',
-                'description' => 'required|min:10|max:1000',
-                'github' => 'required|max:100',
+                'description' => 'max:1000',
+                'github' => 'max:100',
                 'type_id' => 'exists:types,id',
+                'thumb' => 'image',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
                 'title.min' => 'Il titolo deve contenere almeno :min caratteri.',
-                'title.max' => 'La descrizione non può superare i :max caratteri.',
-                'description.min' => 'La descrizione deve contenere almeno :min caratteri.',
+                'title.max' => 'Il titolo non può superare i :max caratteri.',
                 'description.max' => 'La descrizione non può superare i :max caratteri.',
-                'github.max' => 'La descrizione non può superare i :max caratteri.',
+                'github.max' => 'Il link non può superare i :max caratteri.',
+                'thumb.image' => 'Il file deve essere un immagine',
             ]
         );
 
         $new_project = new Project();
         $valData['slug'] = Helper::makeSlug($valData['title'], new Project());
+
+        if (array_key_exists('thumb', $valData)) {
+            $image = Storage::put('uploads', $valData['thumb']);
+            $valData['thumb'] = $image;
+        }
+
         $new_project->fill($valData);
         $new_project->save();
 
@@ -111,17 +119,18 @@ class ProjectController extends Controller
         $valData = $request->validate(
             [
                 'title' => 'required|min:5|max:100',
-                'description' => 'required|min:10|max:1000',
-                'github' => 'required|max:100',
+                'description' => 'max:1000',
+                'github' => 'max:100',
                 'type_id' => 'exists:types,id',
+                'thumb' => 'image',
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio.',
                 'title.min' => 'Il titolo deve contenere almeno :min caratteri.',
-                'title.max' => 'La descrizione non può superare i :max caratteri.',
-                'description.min' => 'La descrizione deve contenere almeno :min caratteri.',
+                'title.max' => 'Il titolo non può superare i :max caratteri.',
                 'description.max' => 'La descrizione non può superare i :max caratteri.',
-                'github.max' => 'La descrizione non può superare i :max caratteri.',
+                'github.max' => 'Il link non può superare i :max caratteri.',
+                'thumb.image' => 'Il file deve essere un immagine',
             ]
         );
         if ($valData['title'] === $project->title) {
@@ -129,8 +138,12 @@ class ProjectController extends Controller
         } else {
             $valData['slug'] = Helper::makeSlug($valData['title'], new Project());
         }
+        if (array_key_exists('thumb', $valData)) {
+            $image = Storage::put('uploads', $valData['thumb']);
+            $valData['thumb'] = $image;
+        }
         $project->update($valData);
-        return redirect()->route('admin.project.index')->with('success', 'Progetto aggiornato con successo.');
+        return redirect()->route('admin.project.show', $project)->with('success', 'Progetto aggiornato con successo.');
     }
     /**
      * Remove the specified resource from storage.
